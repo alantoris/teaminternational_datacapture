@@ -31,31 +31,27 @@ class DataCapture:
         :return: (Stats)
         """
         previous = 0
-        stats = []
-        for cant in self.num_counts:
+        for i, cant in enumerate(self.num_counts):
             less = previous + cant
-            stats.append(
-                {
+            self.num_counts[i] = {
                     "cant": cant,
                     "less": less                 
                 }
-            )
             previous = less
 
-        return Stats(self, stats)
+        return Stats(self)
 
 
 class Stats:
     """
     Class to represent a Stats of a DataCapture
     """
-    def __init__(self, data_capture: DataCapture, stats: list[dict]) -> None:
+    def __init__(self, data_capture: DataCapture) -> None:
         """
-        Create a Statis with a DataCapture and stats related
+        Create a Statis with a DataCapture related
         :return: (None)
         """
         self.data_capture = data_capture
-        self.stats = stats
 
     def less(self, value: int) -> int:
         """
@@ -66,7 +62,7 @@ class Stats:
             if value == 0:
                 return 0
             else:
-                return self.stats[value-1]["less"]
+                return self.data_capture.num_counts[value-1]["less"]
         else:
             raise ValueError(
                 f"The value to query the number of minor elements must be between 0 and {self.data_capture.LENGHT - 1}.")
