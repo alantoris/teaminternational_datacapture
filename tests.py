@@ -86,5 +86,23 @@ class TestDataCapture(unittest.TestCase):
             stats.between(20, 10)
 
 
+    def test_value_type_error(self):
+        capture = DataCapture()
+        with self.assertRaises(TypeError) as _:
+            capture.add("10")
+        with self.assertRaises(TypeError) as _:
+            capture.add(10.5)
+        capture.add(15)
+        capture.add(20)
+        stats = capture.build_stats()
+        with self.assertRaises(TypeError) as _:
+            stats.less("16")
+        with self.assertRaises(TypeError) as _:
+            stats.greater("12")
+        with self.assertRaises(TypeError) as _:
+            stats.between(10.5, 20)
+        with self.assertRaises(TypeError) as _:
+            stats.between("10", 20)
+
 if __name__ == '__main__':
     unittest.main()
