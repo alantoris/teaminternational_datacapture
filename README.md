@@ -6,13 +6,9 @@ Solution for the Data Capture challenge for the international team recruitment p
 # Time complexity
 
 To achieve an implementation with a constant time complexity, 
-an internal Fenwick Tree type structure had to be implemented. 
-This tree manages to carry a sum of elements in subparts of the array 
-depending on the bits of the required index.
+an internal Array structure had to be implemented to store how many time a number is added.
 
-Theoretically, adding an element, searching for the number of less and greater elements, 
-and the range, are functions that have a time complexity of O(log N), with N being the length of the array. 
-For practical purposes, since the array has a fixed size (1000) it can be considered as a constant time complexity.
+After adding all the numbers, we can create the stats. Going through the array and saving not only the number of times element N was added, but also adding the number of minor elements there are. Starting with 0, which will have 0 minor elements, continuing with 1, which will have the number of times that 0 appeared as minor elements, then 2 will have the number of times that 1 appeared added to the number of elements less than 1. This way we can go through the array only once and create enough information so that the functions of the Stats class have constant time complexity.
 
 # Intruccions
 
